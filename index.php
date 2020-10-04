@@ -25,7 +25,7 @@ $lyt->button($name = "btConfiguracoes", "Configurações");
 $lyt->java->setGoToPage("click", $name,"configuracoes.php");
 
 $lyt->button($name = "btAbrirJanelaApresentacao", "Abrir Janela Apresentação");
-$lyt->java->setGoToPage("click", $name,str_replace("index.php", "", THIS)."presenter.php","","","_blank","","8090");
+$lyt->java->setGoToPage("click", $name,str_replace("index.php", "", THIS)."presenter.php","","","_blank","","");
 
 $lyt = new newTable($corpo, "lytB");
 $lyt->css->setPosition(0, 70);
