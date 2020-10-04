@@ -35,21 +35,25 @@ if($page->session->getSession("MUSICA_ID_APRESENTACAO",$PAGENAME)!=$page->sessio
             $arrayLyricB = array();
             foreach ($arrayLyric as $key => $value){
                 $id = count($arrayLyricB);
-                $arrayLyricB[$id]['value'] = $value;
+                $arrayLyricB[$id]['value'] = $key;
                 $arrayLyricB[$id]['text'] = str_replace("$", " ", $value);
             }
 
+            $page->session->setSession("arrayLyric",$arrayLyric,$PAGENAME);
+
             $javaExe->value("tbApresentando",$rowB['title'],true);
-            $javaExe->reloadComboBox("cbParagrafo",$arrayLyricB,false,true);
+            $javaExe->reloadComboBox("cbParagrafo",$arrayLyricB,$key,true);
         }
     }
 
 	$page->session->unSetSession("REMOVER_TUDO",$PAGENAME);
 }else{
+    $arrayLyric = $page->session->getSession("arrayLyric",$PAGENAME);
+
     $upd = new iUpdate($idss,"config");
     $upd->where("id", "=", "1");
-    $upd->set("paragrafoAtual", $page->session->getSession("PARAGRAFO",$PAGENAME));
-    $upd->Exe();
+    $upd->set("paragrafoAtual", $arrayLyric[$page->session->getSession("PARAGRAFO",$PAGENAME)]);
+    $upd->exe();
 }
 
 echo "
